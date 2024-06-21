@@ -40,85 +40,45 @@ try{
     router.put('/:id', getPokemon, async (req, res) => {
         if (req.body.nome != null) {
     res.pokemon.nome = req.body.nome
-    } //aqui
+    }
     if (req.body.sexo != null) {
-
         res.pokemon.sexo = req.body.sexo;
-        
         }
-        
         if (req.body.raça != null) {
-        
         res.pokemon.raça = req.body.raça;
-        
         }
-        
         if (req.body.elemento != null) {
-        
         res.pokemon.elemento = req.body.elemento;
-        
         }
-        
         if (req.body.foto != null) {
-        
         res.pokemon.foto = req.body.foto;
-        
         }
-        
         try {
-        
         const updatedPokemon = await res.pokemon.save();
-        
         res.json(updatedpokemon);
-        
         } catch (err) {
-        
         res.status(400).json({ message: err.message });
-        
         }
-        
         });
-        
         router.delete('/:id', getPokemon, async (req, res) => {
-        
         try {
-        
         await res.pokemon.deleteOne();
-        
         res.json({ message: 'Pokemon excluído com sucesso!' });
-        
         } catch (err) {
-        
         res.status(500).json({ message: err.message });
-        
         }
-        
         });
-        
         async function getPokemon(req, res, next) {
-        
         try {
-        
         const pokemon = await Pokemon.findById(req.params.id);
-        
         if (pokemon == null) {
-        
         return res.status(404).json({ message: 'Pokemon não encontrado' });
-        
         }
-        
         res.pokemon = pokemon;
-        
         next();
-        
         } catch (err) {
-        
         return res.status(500).json({ message: err.message });
-        
         }
-        
         }
-        
         module.exports = router;
-        
-        5. Configure o arquivo principal app.js:
+    
